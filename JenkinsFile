@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        git branch: 'main', url: 'https://github.com/SreejithAWS/Springboot-App-Java.git'
+        git branch: 'main', url: 'https://github.com/sreejithlalu/Springboot-App-Java.git'
       }
     }
     stage('Build and Test') {
@@ -48,7 +48,7 @@ pipeline {
     stage('Update Deployment File') {
         environment {
             GIT_REPO_NAME = "Springboot-App-Java"
-            GIT_USER_NAME = "SreejithAWS"
+            GIT_USER_NAME = "sreejithlalu"
         }
         steps {
             withCredentials([string(credentialsId: 'Github', variable: 'GITHUB_TOKEN')]) {
