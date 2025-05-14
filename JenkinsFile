@@ -57,6 +57,9 @@ pipeline {
                     ls -la
     
                     cd "$WORKSPACE" || exit 1
+
+                     # Fix ownership if needed
+                     chown -R root:root .
     
                      # Check if .git exists
                      if [ ! -d ".git" ]; then
