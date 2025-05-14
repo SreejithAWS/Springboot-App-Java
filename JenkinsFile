@@ -53,10 +53,10 @@ pipeline {
         steps {
             withCredentials([string(credentialsId: 'Github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
-                    echo "Working Directory: $(pwd)"
-                    ls -la
-                    # Ensure we are inside the Git repo
-                    cd $WORKSPACE || exit 1
+                     echo "Working Directory: $(pwd)"
+                     ls -la
+                    # Ensure we are inside the Git repo, quoting $WORKSPACE in case of spaces
+                    cd "$WORKSPACE" || exit 1
                     git config user.email "sreejitheyne@gmail.com"
                     git config user.name "Sreejith Lalu C"
                     BUILD_NUMBER=${BUILD_NUMBER}
