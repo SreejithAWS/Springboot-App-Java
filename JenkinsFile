@@ -52,17 +52,22 @@ pipeline {
         }
         steps {
             withCredentials([string(credentialsId: 'Github', variable: 'GITHUB_TOKEN')]) {
-                sh '''
-                     echo "Working Directory: $(pwd)"
-                     ls -la
-                    # Ensure we are inside the Git repo, quoting $WORKSPACE in case of spaces
+                    sh '''
+                         echo "Working Directory: $(pwd)"
+                    ls -la
+    
                     cd "$WORKSPACE" || exit 1
-                    git --version || echo "Git is not installed!"
+    
+                    # Ensure it's a Git repository
                     git init
+    
+                    # Configure Git
                     git config user.email "sreejitheyne@gmail.com"
                     git config user.name "Sreejith Lalu C"
-                    BUILD_NUMBER=${BUILD_NUMBER}
+    
+                    # Replace the image tag in deployment file
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
+
                     git add deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
