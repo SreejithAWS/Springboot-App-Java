@@ -58,6 +58,7 @@ pipeline {
                     # Ensure we are inside the Git repo, quoting $WORKSPACE in case of spaces
                     cd "$WORKSPACE" || exit 1
                     git --version || echo "Git is not installed!"
+                    git init
                     git config user.email "sreejitheyne@gmail.com"
                     git config user.name "Sreejith Lalu C"
                     BUILD_NUMBER=${BUILD_NUMBER}
