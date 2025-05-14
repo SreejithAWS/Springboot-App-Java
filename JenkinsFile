@@ -58,8 +58,12 @@ pipeline {
     
                     cd "$WORKSPACE" || exit 1
     
-                    # Ensure it's a Git repository
-                    git init
+                    # Check if .git exists
+                     if [ ! -d ".git" ]; then
+                    echo "Error: .git directory not found. Make sure this is a cloned Git repository."
+                    exit 1
+                     fi
+
     
                     # Configure Git
                     git config user.email "sreejitheyne@gmail.com"
